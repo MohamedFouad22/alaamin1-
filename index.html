@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأمين للتبريد والتكيف</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/png" href="./images/الامين.png">
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(180deg, #f5f5f5 0%, #e0f7ff 100%);
+  direction: rtl;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #007acc;
+  padding: 15px 20px;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav h1 { font-size: 22px; text-align: center; }
+
+#whatsappBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #25d366;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  max-width: calc(100% - 30px);
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+  text-decoration: none;
+  word-break: break-word;
+}
+#whatsappBtn:hover { transform: scale(1.1); background-color: #1ebe5d; }
+
+.hero {
+  background: linear-gradient(90deg, #007acc 0%, #00bfff 100%);
+  color: #fff;
+  padding: 100px 15px 60px;
+  text-align: center;
+}
+.hero h2 { font-size: 32px; margin-bottom: 15px; animation: slideIn 1s ease forwards; opacity: 0; }
+.hero p { font-size: 16px; max-width: 90%; margin: 0 auto 25px; animation: fadeIn 1.5s ease forwards; opacity: 0; }
+.hero a.cta { background: #ffd700; color: #007acc; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 50px; margin: 5px; display: inline-block; transition: 0.3s, box-shadow 0.3s; }
+.hero a.cta:hover { background: #ffbf00; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+
+.services-cards {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 50px 10px;
+}
+.card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  width: 90%;
+  max-width: 260px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.4s, box-shadow 0.4s;
+  opacity: 0;
+  transform: translateY(50px);
+}
+.card.show { opacity: 1; transform: translateY(0); transition: all 0.7s ease-in-out; }
+.card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+.card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; transition: transform 0.3s; }
+.card img:hover { transform: scale(1.05); }
+.card h4 { font-size: 18px; color: #007acc; margin-bottom: 8px; }
+.card p { font-size: 14px; color: #333; }
+
+.about-us {
+  padding: 50px 15px;
+  background-color: #e0f0ff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.about-us img {
+  width: 90%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  margin: 0 20px 20px;
+}
+.about-us p {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 700px;
+  text-align: justify;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+.gallery {
+  padding: 50px 15px; text-align: center; background-color: #f5f5f5;
+}
+.gallery h3 { font-size: 26px; margin-bottom: 30px; color: #007acc; }
+.gallery img { width: 90%; max-width: 300px; height: auto; margin: 10px; border-radius: 15px; object-fit: cover; cursor: pointer; transition: transform 0.4s, box-shadow 0.4s; }
+.gallery img:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+.why-us { padding: 50px 15px; text-align: center; }
+.why-us h3 { font-size: 26px; margin-bottom: 30px; color: #007acc; }
+.why-us ul { list-style: none; padding: 0; max-width: 700px; margin: 0 auto; }
+.why-us li { font-size: 15px; margin-bottom: 12px; padding-left: 25px; position: relative; }
+.why-us li::before { content: "✔"; position: absolute; left: 0; color: #007acc; }
+
+.testimonials {
+  background-color: #007acc; color: #fff; padding: 50px 15px; text-align: center;
+}
+.testimonials h3 { font-size: 26px; margin-bottom: 30px; }
+.testimonial-wrapper { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
+.testimonial-card {
+  background-color: #e0f0ff; color: #333; padding: 15px; border-radius: 15px; min-width: 250px; flex-shrink: 0;
+}
+
+footer {
+  background-color: #222; color: #fff; text-align: center; padding: 30px 10px;
+}
+footer a { margin: 0 10px; color: #fff; font-size: 24px; transition: 0.3s; }
+footer a:hover { color: #ffd700; }
+footer a.facebook:hover { color: #1877f2; }
+footer a.telegram:hover { color: #0088cc; }
+footer a.whatsapp:hover { color: #25d366; }
+footer a i { font-size: 30px; }
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: #007acc;
+  color: #fff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s, background 0.3s;
+}
+#backToTop:hover { transform: scale(1.1); background-color: #005ea3; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 480px) {
+  .hero h2 { font-size: 24px; }
+  .hero p { font-size: 14px; }
+  .hero a.cta { padding: 8px 15px; font-size: 14px; }
+  .services-cards { gap: 15px; }
+  .card { width: 95%; padding: 12px; }
+  .card h4 { font-size: 16px; }
+  .card p { font-size: 13px; }
+  .about-us img { max-width: 100%; margin: 0 0 15px; }
+  .about-us p { font-size: 14px; }
+  .gallery h3, .why-us h3, .testimonials h3 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>الأمين للتبريد والتكيف</h1>
+</nav>
+
+<a href="https://wa.me/966536565481" target="_blank" id="whatsappBtn">📞 تواصل معنا</a>
+
+<section class="hero" id="hero">
+  <h2>الأمين للتبريد والتكيف وصيانة الأجهزة الكهربائية</h2>
+  <p>نقدم أفضل خدمات التبريد والتكييف وصيانة الأجهزة الكهربائية مع فريق محترف يضمن جودة العمل وسرعة الإنجاز.</p>
+  <a href="https://wa.me/966536565481" class="cta">اطلب الخدمة الآن</a>
+  <a href="#services" class="cta">شاهد خدماتنا</a>
+</section>
+
+<section class="services-cards" id="services">
+  <div class="card"><img src="./images/تكيف.jpg" alt="تكييف" loading="lazy"><h4>تركيب وصيانة التكييف</h4><p>تركيب جميع أنواع التكييف وصيانة الأجهزة لضمان أداء ممتاز.</p></div>
+  <div class="card"><img src="./images/ثلاجه.jpg" alt="ثلاجات" loading="lazy"><h4>صيانة الثلاجات</h4><p>فحص وإصلاح جميع أنواع الثلاجات المنزلية والتجارية.</p></div>
+  <div class="card"><img src="./images/مروحه.jpg" alt="مراوح" loading="lazy"><h4>صيانة المراوح</h4><p>خدمة سريعة وفعالة لجميع أنواع المراوح والمكيفات.</p></div>
+  <div class="card"><img src="./images/اجهزه.jpg" alt="أجهزة كهربائية" loading="lazy"><h4>صيانة الأجهزة الكهربائية</h4><p>إصلاح شامل للأجهزة الكهربائية المنزلية والمكتبية.</p></div>
+</section>
+
+<section class="about-us" id="about-us">
+  <img src="./images/الامين.png" alt="الأمين للتبريد والتكيف" loading="lazy">
+  <p>الأمين للتبريد والتكيف وصيانة الأجهزة الكهربائية يقدم خدمات عالية الجودة في تركيب وصيانة التكييفات والثلاجات والمراوح والأجهزة الكهربائية المنزلية والمكتبية. نحن نسعى دائمًا لتقديم حلول مبتكرة وفعّالة تلبي احتياجات عملائنا، مع التركيز على الدقة والموثوقية في كل عملية صيانة أو تركيب. فريقنا يتميز بالاحترافية والخبرة الطويلة، مع السرعة في إنجاز الأعمال، والالتزام التام بمواعيد العملاء وضمان رضاهم التام. كما نحرص على استخدام أفضل الأدوات والقطع الأصلية لضمان استمرار الأداء المثالي لأجهزتكم لفترة طويلة.</p>
+</section>
+
+<section class="gallery" id="gallery">
+  <h3>معرضنا</h3>
+  <img src="./images/اجهزه2.jpg" alt="مشروع 1" loading="lazy">
+  <img src="./images/ثلاجه2.jpg" alt="مشروع 2" loading="lazy">
+  <img src="./images/كولدير.jpg" alt="مشروع 3" loading="lazy">
+  <img src="./images/تكيف.jpg" alt="مشروع 4" loading="lazy">
+</section>
+
+<section class="why-us" id="why-us">
+  <h3>لماذا نحن؟</h3>
+  <ul>
+    <li>فريق متخصص ومحترف في التبريد والتكييف</li>
+    <li>جودة عالية وسرعة في الأداء</li>
+    <li>أسعار مناسبة وخدمة عملاء ممتازة</li>
+    <li>صيانة لجميع الأجهزة الكهربائية بأعلى كفاءة</li>
+  </ul>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <h3>آراء العملاء</h3>
+  <div class="testimonial-wrapper">
+    <div class="testimonial-card"><p>خدمة ممتازة وسريعة! أنصح بالتعامل مع الأمين للتبريد والتكيف.</p><strong>- عميل </strong></div>
+    <div class="testimonial-card"><p>فريق محترف وملتزم بالمواعيد وجودة العمل رائعة.</p><strong>- عميل </strong></div>
+    <div class="testimonial-card"><p>تعامل ممتاز وسرعة في الاستجابة لكل الأعطال.</p><strong>- عميل </strong></div>
+  </div>
+</section>
+
+<footer>
+  <a href="https://www.facebook.com/share/1ZD9fAH2bX/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://wa.me/966536565481" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://t.me/+966536565481" class="telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+  <p>&copy; 2025 الأمين للتبريد والتكيف</p>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
+
+<script>
+window.onscroll = function() {
+  const btn = document.getElementById('backToTop');
+  btn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? 'flex' : 'none';
+}
+const cards = document.querySelectorAll('.card');
+window.addEventListener('scroll', ()=> {
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){ card.classList.add('show'); }
+  });
+});
+</script>
+
+</body>
+</html>
